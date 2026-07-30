@@ -11,6 +11,7 @@ import {
   Tag,
   Users,
   Image as ImageIcon,
+  Calendar,
   BarChart3,
   FileSpreadsheet,
   UserCheck,
@@ -35,6 +36,7 @@ export default function AdminSidebar({ userRole, userName }: AdminSidebarProps) 
   const navItems = [
     { label: 'Dashboard', href: '/admin', icon: LayoutDashboard, role: 'AUTHOR' },
     { label: 'Articles', href: '/admin/articles', icon: FileText, role: 'AUTHOR' },
+    { label: 'Post Scheduler', href: '/admin/post-scheduler', icon: Calendar, role: 'AUTHOR' },
     { label: 'Categories', href: '/admin/categories', icon: FolderTree, role: 'EDITOR' },
     { label: 'Tags', href: '/admin/tags', icon: Tag, role: 'EDITOR' },
     { label: 'Authors', href: '/admin/authors', icon: Users, role: 'ADMIN' },
