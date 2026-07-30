@@ -12,14 +12,14 @@ export default function RootLayout({
   const websiteJsonLd = generateWebsiteJsonLd();
 
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-indigo-600 selection:text-white" suppressHydrationWarning>
+      <body className="min-h-screen bg-brand-dark text-slate-100 font-sans antialiased selection:bg-brand-primary selection:text-white" suppressHydrationWarning>
         {children}
       </body>
     </html>

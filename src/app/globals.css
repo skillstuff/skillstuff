@@ -25,8 +25,8 @@
 
   body {
     font-family: var(--font-sans);
-    @apply bg-brand-bg text-brand-text dark:bg-brand-dark dark:text-slate-100 antialiased selection:bg-brand-primary selection:text-white;
-    background-image: radial-gradient(rgba(226, 232, 240, 0.7) 1px, transparent 1px);
+    @apply bg-brand-dark text-slate-100 antialiased selection:bg-brand-primary selection:text-white;
+    background-image: radial-gradient(rgba(226, 232, 240, 0.15) 1px, transparent 1px);
     background-size: 24px 24px;
   }
 
@@ -58,7 +58,7 @@
   }
 
   .btn-secondary {
-    @apply bg-brand-surface dark:bg-slate-800 text-brand-primary dark:text-brand-accent font-semibold border-2 border-brand-secondary/30 dark:border-brand-secondary/50 rounded-btn px-5 py-2.5 hover:bg-brand-gradient hover:text-white hover:border-transparent hover:shadow-brand-soft hover:-translate-y-0.5 transition-all duration-200 inline-flex items-center justify-center space-x-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary;
+    @apply bg-slate-800 text-brand-accent font-semibold border-2 border-brand-secondary/40 rounded-btn px-5 py-2.5 hover:bg-brand-gradient hover:text-white hover:border-transparent hover:shadow-brand-soft hover:-translate-y-0.5 transition-all duration-200 inline-flex items-center justify-center space-x-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary;
   }
 
   .btn-danger {
@@ -70,23 +70,19 @@
   }
 
   .card-master {
-    @apply bg-brand-surface dark:bg-slate-800 rounded-card border border-brand-border dark:border-slate-800 p-6 shadow-brand-soft hover:shadow-brand-glow hover:-translate-y-1 transition-all duration-300;
+    @apply bg-slate-900 rounded-card border border-slate-800 p-6 shadow-brand-soft hover:shadow-brand-glow hover:-translate-y-1 transition-all duration-300;
   }
 
   .input-master {
-    @apply w-full px-4 py-2.5 rounded-input bg-brand-surface dark:bg-slate-900 border border-brand-border dark:border-slate-800 text-brand-text dark:text-white placeholder-brand-muted text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all;
+    @apply w-full px-4 py-2.5 rounded-input bg-slate-950 border border-slate-800 text-white placeholder-slate-500 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all;
   }
 }
 
 /* Custom Typography & Prose Styling */
 .prose {
   font-family: var(--font-sans);
-  color: var(--color-muted);
-  line-height: 1.6;
-}
-
-.dark .prose {
   color: #cbd5e1;
+  line-height: 1.6;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
@@ -96,30 +92,30 @@
 }
 
 .prose h2 {
-  @apply text-2xl sm:text-3xl font-extrabold text-brand-text dark:text-white mt-10 mb-4 pb-2.5 border-b border-brand-border dark:border-slate-800 scroll-mt-20;
+  @apply text-2xl sm:text-3xl font-extrabold text-white mt-10 mb-4 pb-2.5 border-b border-slate-800 scroll-mt-20;
 }
 
 .prose h3 {
-  @apply text-xl font-bold text-brand-text dark:text-white mt-8 mb-3 scroll-mt-20;
+  @apply text-xl font-bold text-white mt-8 mb-3 scroll-mt-20;
 }
 
 .prose p {
-  @apply text-brand-text/80 dark:text-slate-300 mb-5 text-base leading-relaxed;
+  @apply text-slate-300 mb-5 text-base leading-relaxed;
 }
 
 .prose blockquote {
   font-family: var(--font-heading);
-  @apply border-l-4 border-brand-primary bg-brand-50 dark:bg-slate-800/60 p-5 rounded-r-card italic my-6 text-brand-text dark:text-slate-200 text-base shadow-brand-soft border-y border-r border-brand-100 dark:border-slate-700/60;
+  @apply border-l-4 border-brand-primary bg-slate-800/60 p-5 rounded-r-card italic my-6 text-slate-200 text-base shadow-brand-soft border-y border-r border-slate-700/60;
 }
 
 .prose pre {
   font-family: var(--font-mono);
-  @apply bg-brand-dark text-slate-100 p-5 rounded-card overflow-x-auto my-6 text-xs sm:text-sm border border-slate-800 shadow-xl leading-relaxed;
+  @apply bg-slate-950 text-slate-100 p-5 rounded-card overflow-x-auto my-6 text-xs sm:text-sm border border-slate-800 shadow-xl leading-relaxed;
 }
 
 .prose code {
   font-family: var(--font-mono);
-  @apply bg-brand-50 dark:bg-slate-800/90 text-brand-primary dark:text-brand-accent px-2 py-0.5 rounded-md font-semibold text-xs border border-brand-100 dark:border-slate-700/60;
+  @apply bg-slate-800/90 text-brand-accent px-2 py-0.5 rounded-md font-semibold text-xs border border-slate-700/60;
 }
 
 .prose pre code {
@@ -127,16 +123,16 @@
 }
 
 .prose table {
-  @apply w-full border-collapse my-6 text-left text-xs sm:text-sm rounded-table overflow-hidden shadow-brand-soft border border-brand-border dark:border-slate-800;
+  @apply w-full border-collapse my-6 text-left text-xs sm:text-sm rounded-table overflow-hidden shadow-brand-soft border border-slate-800;
 }
 
 .prose th {
   font-family: var(--font-heading);
-  @apply bg-slate-100 dark:bg-slate-900 p-4 font-bold text-brand-text dark:text-white border-b border-brand-border dark:border-slate-800;
+  @apply bg-slate-900 p-4 font-bold text-white border-b border-slate-800;
 }
 
 .prose td {
-  @apply p-4 border-b border-slate-100 dark:border-slate-800/60 text-slate-700 dark:text-slate-300;
+  @apply p-4 border-b border-slate-800/60 text-slate-300;
 }
 
 /* Custom Scrollbar */
@@ -150,5 +146,5 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-800 rounded-full hover:bg-slate-400 dark:hover:bg-slate-700;
+  @apply bg-slate-800 rounded-full hover:bg-slate-700;
 }

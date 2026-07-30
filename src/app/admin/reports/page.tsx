@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { FileSpreadsheet, Download, Filter, Search } from 'lucide-react';
+import { Download, Search } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 interface ReportsPageProps {
@@ -45,14 +45,14 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
         <div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">Reports &amp; Export Center</h1>
-          <p className="text-xs text-slate-400">Generate, filter, and export performance reports to CSV</p>
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Reports &amp; Export Center</h1>
+          <p className="text-xs text-slate-400 font-medium">Generate, filter, and export performance reports to CSV</p>
         </div>
 
         <a
           href={`/api/admin/reports/export?type=${type}`}
           download
-          className="flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all shadow-md shadow-emerald-600/30"
+          className="btn-success"
         >
           <Download className="w-4 h-4" />
           <span>Export {type.toUpperCase()} Report (CSV)</span>
@@ -60,15 +60,15 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
       </div>
 
       {/* Filter Tabs & Search */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900 p-4 rounded-2xl border border-slate-800">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900 p-4 rounded-card border border-slate-800 shadow-brand-soft">
         <div className="flex items-center space-x-2">
           <span className="text-xs text-slate-400 font-semibold">Report Type:</span>
           {['articles', 'subscribers', 'categories'].map((t) => (
             <Link
               key={t}
               href={`/admin/reports?type=${t}`}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold capitalize transition-all ${
-                type === t ? 'bg-brand-600 text-white' : 'bg-slate-800 text-slate-400 hover:text-white'
+              className={`px-3 py-1.5 rounded-btn text-xs font-bold capitalize transition-all ${
+                type === t ? 'bg-brand-gradient text-white shadow-brand-soft' : 'bg-slate-800 text-slate-400 hover:text-white'
               }`}
             >
               {t}
@@ -76,7 +76,7 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
           ))}
         </div>
 
-        <form action="/admin/reports" method="GET" className="flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+        <form action="/admin/reports" method="GET" className="flex items-center space-x-2 bg-slate-950 px-3.5 py-1.5 rounded-btn border border-slate-800">
           <input type="hidden" name="type" value={type} />
           <Search className="w-4 h-4 text-slate-500" />
           <input
@@ -90,7 +90,7 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
       </div>
 
       {/* Report Data Table */}
-      <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-sm">
+      <div className="bg-slate-900 rounded-card border border-slate-800 overflow-hidden shadow-brand-soft">
         {type === 'articles' && (
           <table className="w-full text-left text-xs text-slate-300">
             <thead className="bg-slate-950 text-slate-400 uppercase tracking-wider text-[10px] font-bold border-b border-slate-800">
@@ -104,12 +104,12 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
             </thead>
             <tbody className="divide-y divide-slate-800/60">
               {reportData.map((a) => (
-                <tr key={a.id} className="hover:bg-slate-850">
+                <tr key={a.id} className="hover:bg-slate-850 transition-colors">
                   <td className="p-4 font-bold text-white max-w-sm truncate">{a.title}</td>
                   <td className="p-4">{a.category.name}</td>
                   <td className="p-4">{a.author.displayName}</td>
-                  <td className="p-4 font-bold text-emerald-400">{a.status}</td>
-                  <td className="p-4 text-right font-extrabold text-brand-400">{a.viewCount}</td>
+                  <td className="p-4 font-bold text-[#4DD6C2]">{a.status}</td>
+                  <td className="p-4 text-right font-extrabold text-brand-accent font-mono">{a.viewCount}</td>
                 </tr>
               ))}
             </tbody>
@@ -128,11 +128,11 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
             </thead>
             <tbody className="divide-y divide-slate-800/60">
               {reportData.map((s) => (
-                <tr key={s.id} className="hover:bg-slate-850">
+                <tr key={s.id} className="hover:bg-slate-850 transition-colors">
                   <td className="p-4 font-mono font-bold text-white">{s.email}</td>
-                  <td className="p-4 font-bold text-emerald-400">{s.status}</td>
+                  <td className="p-4 font-bold text-[#4DD6C2]">{s.status}</td>
                   <td className="p-4 text-slate-400">{s.source || 'homepage'}</td>
-                  <td className="p-4 text-slate-400">{formatDate(s.createdAt)}</td>
+                  <td className="p-4 text-slate-400 font-medium">{formatDate(s.createdAt)}</td>
                 </tr>
               ))}
             </tbody>
@@ -150,10 +150,10 @@ export default async function AdminReportsPage({ searchParams }: ReportsPageProp
             </thead>
             <tbody className="divide-y divide-slate-800/60">
               {reportData.map((c) => (
-                <tr key={c.id} className="hover:bg-slate-850">
+                <tr key={c.id} className="hover:bg-slate-850 transition-colors">
                   <td className="p-4 font-bold text-white">{c.name}</td>
                   <td className="p-4 font-mono text-slate-400">/category/{c.slug}</td>
-                  <td className="p-4 text-right font-extrabold text-brand-400">{c._count.articles}</td>
+                  <td className="p-4 text-right font-extrabold text-brand-accent font-mono">{c._count.articles}</td>
                 </tr>
               ))}
             </tbody>
