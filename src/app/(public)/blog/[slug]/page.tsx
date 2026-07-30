@@ -7,7 +7,6 @@ import { constructMetadata, generateArticleJsonLd, generateBreadcrumbJsonLd } fr
 import TableOfContents from '@/components/public/TableOfContents';
 import SocialShare from '@/components/public/SocialShare';
 import ArticleCard from '@/components/public/ArticleCard';
-import AdSenseSlot from '@/components/adsense/AdSenseSlot';
 import { trackArticleView } from '@/lib/analytics';
 import { formatDate } from '@/lib/utils';
 import { Clock, Eye, Calendar, User, ChevronRight, BookOpen } from 'lucide-react';
@@ -161,9 +160,6 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
         </div>
       )}
 
-      {/* Header AdSense Slot */}
-      <AdSenseSlot slotId="article-header-ad" label="In-Article Sponsor" />
-
       {/* Main Article Content & Sidebar Grid */}
       <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
         <div className="lg:col-span-8 space-y-6">
@@ -175,9 +171,6 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
             className="prose dark:prose-invert max-w-none text-slate-800 dark:text-slate-200"
             dangerouslySetInnerHTML={{ __html: article.content }}
           />
-
-          {/* Mid-Content AdSense Slot */}
-          <AdSenseSlot slotId="in-content-mid-ad" format="horizontal" label="In-Content Sponsor" />
 
           {/* Article Tags */}
           {article.tags.length > 0 && (
@@ -226,11 +219,8 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
             </Link>
           </div>
         </div>
-
         {/* Sidebar */}
         <div className="lg:col-span-4 space-y-6">
-          <AdSenseSlot slotId="article-sidebar-ad" format="rectangle" label="Sidebar Advertisement" />
-
           {/* Category Info Widget */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-3 shadow-sm">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center">
@@ -261,7 +251,6 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
         </section>
       )}
 
-      <AdSenseSlot slotId="article-bottom-banner" label="Footer Sponsor Advertisement" />
     </article>
   );
 }

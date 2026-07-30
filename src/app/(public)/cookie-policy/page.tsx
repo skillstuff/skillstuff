@@ -13,7 +13,7 @@ export default function CookiePolicyPage() {
       <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Cookie Policy</h1>
       <div className="prose dark:prose-invert max-w-none text-slate-700 dark:text-slate-300 space-y-4 text-sm leading-relaxed">
         <p>SkillStuff.com uses essential cookies to manage authentication sessions, remember UI preferences, and process anonymized analytics metrics.</p>
-        <p>Third-party vendors (such as Google AdSense) may place cookies to serve non-intrusive advertisements. You can disable non-essential cookies through your web browser preferences at any time.</p>
+        <p>Third-party analytics or performance tools may place cookies for site optimization. You can disable non-essential cookies through your web browser preferences at any time.</p>
       </div>
     </div>
   );

@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { prisma } from '@/lib/prisma';
 import ArticleCard from '@/components/public/ArticleCard';
 import NewsletterBox from '@/components/public/NewsletterBox';
-import AdSenseSlot from '@/components/adsense/AdSenseSlot';
 import { Sparkles, TrendingUp, Compass, ArrowRight, Code2, Users } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
@@ -125,9 +124,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Top Banner AdSense Slot */}
-      <AdSenseSlot slotId="header-top-banner" label="Sponsor Advertisement" />
-
       {/* Category Pills Navigation */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-3">
@@ -202,9 +198,6 @@ export default async function HomePage() {
                 ))}
               </div>
             </div>
-
-            {/* Sidebar AdSense Slot */}
-            <AdSenseSlot slotId="sidebar-widget-ad" format="rectangle" label="Sponsored Sidebar" />
 
             {/* Authors Spotlight */}
             <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-4 shadow-sm">

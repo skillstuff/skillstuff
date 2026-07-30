@@ -2,7 +2,6 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import ArticleCard from '@/components/public/ArticleCard';
-import AdSenseSlot from '@/components/adsense/AdSenseSlot';
 import { constructMetadata } from '@/lib/seo';
 import { Tag } from 'lucide-react';
 
@@ -52,9 +51,6 @@ export default async function TagDetailPage({ params }: { params: Promise<{ slug
           {publishedArticles.length} Published Articles tagged with #{tag.name}
         </span>
       </div>
-
-      <AdSenseSlot slotId="tag-top-banner" label="Tag Topic Sponsor" />
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {publishedArticles.map((article) => (
           <ArticleCard key={article.id} article={article} />

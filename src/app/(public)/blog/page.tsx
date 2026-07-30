@@ -2,7 +2,6 @@ import React from 'react';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import ArticleCard from '@/components/public/ArticleCard';
-import AdSenseSlot from '@/components/adsense/AdSenseSlot';
 import { constructMetadata } from '@/lib/seo';
 import { Filter, Search, BookOpen } from 'lucide-react';
 
@@ -153,8 +152,6 @@ export default async function BlogArchivePage({ searchParams }: BlogPageProps) {
         </div>
       )}
 
-      {/* AdSense Slot */}
-      <AdSenseSlot slotId="blog-archive-bottom-banner" label="Archive Sponsor" />
     </div>
   );
 }

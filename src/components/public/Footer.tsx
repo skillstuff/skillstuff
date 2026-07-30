@@ -22,7 +22,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center space-x-3 text-xs text-slate-400">
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                <ShieldCheck className="w-3 h-3 mr-1" /> AdSense Compliant
+                <ShieldCheck className="w-3 h-3 mr-1" /> Privacy Compliant
               </span>
               <a href="/feed.xml" target="_blank" rel="noopener noreferrer" className="hover:text-amber-400 flex items-center transition-colors">
                 <Rss className="w-3.5 h-3.5 mr-1" /> RSS Feed
