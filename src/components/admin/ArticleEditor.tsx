@@ -1,7 +1,22 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+
 import { useRouter } from 'next/navigation';
+
+const EditorJSComponent = dynamic(
+  () => import('@/components/admin/editor/EditorJSComponent'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="p-8 text-center text-xs text-slate-500 bg-slate-950 border border-slate-800 rounded-input animate-pulse">
+        Loading Editor.js...
+      </div>
+    ),
+  }
+);
+
 import {
   Save,
   Eye,
@@ -269,7 +284,7 @@ export default function ArticleEditor({
                     activeTab === 'write' ? 'bg-brand-gradient text-white shadow-brand-soft' : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  Write Content
+                  Editor.js Writer
                 </button>
                 <button
                   type="button"
@@ -283,39 +298,15 @@ export default function ArticleEditor({
                 </button>
               </div>
 
-              {/* Formatting Toolbar */}
-              <div className="hidden sm:flex items-center space-x-1">
-                <button type="button" onClick={() => insertSnippet('<h2>Section Heading</h2>')} title="H2 Heading" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
-                  <Heading1 className="w-4 h-4" />
-                </button>
-                <button type="button" onClick={() => insertSnippet('<h3>Subheading</h3>')} title="H3 Subheading" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
-                  <Heading2 className="w-4 h-4" />
-                </button>
-                <button type="button" onClick={() => insertSnippet('<strong>Bold Text</strong>')} title="Bold" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
-                  <Bold className="w-4 h-4" />
-                </button>
-                <button type="button" onClick={() => insertSnippet('<em>Italic Text</em>')} title="Italic" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
-                  <Italic className="w-4 h-4" />
-                </button>
-                <button type="button" onClick={() => insertSnippet('<pre><code class="language-typescript">\n// Code snippet here\n</code></pre>')} title="Code Block" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
-                  <Code className="w-4 h-4" />
-                </button>
-                <button type="button" onClick={() => insertSnippet('<blockquote><p>"Insightful quote here..."</p></blockquote>')} title="Quote" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
-                  <Quote className="w-4 h-4" />
-                </button>
-                <button type="button" onClick={() => insertSnippet('<hr />')} title="Separator" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
-                  <Minus className="w-4 h-4" />
-                </button>
-              </div>
+              <span className="text-[11px] font-semibold text-slate-400 bg-slate-800/80 px-2.5 py-1 rounded-full border border-slate-700">
+                Powered by Editor.js
+              </span>
             </div>
 
             {activeTab === 'write' ? (
-              <textarea
-                rows={16}
-                required
-                value={form.content}
-                onChange={(e) => setForm({ ...form, content: e.target.value })}
-                className="w-full p-4 rounded-input border border-slate-800 bg-slate-950 text-slate-100 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-primary"
+              <EditorJSComponent
+                initialContent={form.content}
+                onChange={(html) => setForm((prev) => ({ ...prev, content: html }))}
               />
             ) : (
               <div
@@ -324,6 +315,7 @@ export default function ArticleEditor({
               />
             )}
           </div>
+
         </div>
 
         {/* Right Settings Sidebar */}
