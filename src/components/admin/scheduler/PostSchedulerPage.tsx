@@ -337,7 +337,7 @@ export default function PostSchedulerPage({
       />
 
       {/* PUBLISHING ANALYTICS SECTION */}
-      <AnalyticsSection categoryDistribution={categories.map((c) => ({ name: c.name, count: Math.floor(Math.random() * 8) + 2 }))} />
+      <AnalyticsSection categoryDistribution={categories.map((c, idx) => ({ name: c.name, count: ((idx * 3 + 4) % 8) + 2 }))} />
 
       {/* SCHEDULE NEW POST MODAL */}
       <SchedulePostModal

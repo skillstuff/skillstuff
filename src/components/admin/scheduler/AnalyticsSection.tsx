@@ -86,7 +86,7 @@ export default function AnalyticsSection({ categoryDistribution }: AnalyticsSect
                 <div key={idx} className="space-y-1">
                   <div className="flex justify-between text-xs font-semibold text-slate-200">
                     <span>{cat.name}</span>
-                    <span className="font-mono text-slate-400">{cat.count} posts ({pct}%)</span>
+                    <span className="font-mono text-slate-400" suppressHydrationWarning>{cat.count} posts ({pct}%)</span>
                   </div>
                   <div className="w-full bg-[#111827] h-2 rounded-full overflow-hidden border border-[#334155]/60">
                     <div
