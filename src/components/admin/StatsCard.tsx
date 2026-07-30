@@ -12,22 +12,22 @@ interface StatsCardProps {
 
 export default function StatsCard({ title, value, subtitle, icon: Icon, trend, trendType = 'positive' }: StatsCardProps) {
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 shadow-sm hover:shadow-md transition-all">
+    <div className="bg-slate-900 rounded-card border border-slate-800 p-6 shadow-brand-soft hover:shadow-brand-glow hover:-translate-y-0.5 transition-all duration-300">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{title}</span>
-        <div className="w-9 h-9 rounded-xl bg-brand-50 dark:bg-brand-950/50 text-brand-600 dark:text-brand-400 flex items-center justify-center">
-          <Icon className="w-5 h-5" />
+        <span className="text-xs font-extrabold text-slate-400 uppercase tracking-wider">{title}</span>
+        <div className="w-10 h-10 rounded-btn bg-brand-gradient text-white flex items-center justify-center shadow-brand-soft">
+          <Icon className="w-5 h-5 text-white" />
         </div>
       </div>
 
       <div className="mt-3 flex items-baseline justify-between">
-        <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">{value}</span>
+        <span className="text-2xl sm:text-3xl font-black text-white tracking-tight">{value}</span>
         {trend && (
           <span
-            className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+            className={`text-xs font-bold px-2.5 py-0.5 rounded-md ${
               trendType === 'positive'
-                ? 'bg-emerald-100 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400'
-                : 'bg-rose-100 dark:bg-rose-950/50 text-rose-600 dark:text-rose-400'
+                ? 'bg-[#10B981]/15 text-[#4DD6C2] border border-[#10B981]/30'
+                : 'bg-rose-500/15 text-rose-400 border border-rose-500/30'
             }`}
           >
             {trend}
@@ -35,7 +35,7 @@ export default function StatsCard({ title, value, subtitle, icon: Icon, trend, t
         )}
       </div>
 
-      {subtitle && <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">{subtitle}</p>}
+      {subtitle && <p className="mt-1.5 text-xs text-slate-400 font-medium">{subtitle}</p>}
     </div>
   );
 }

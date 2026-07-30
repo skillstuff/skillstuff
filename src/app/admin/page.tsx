@@ -13,7 +13,6 @@ import {
   Clock,
   TrendingUp,
   Plus,
-  ShieldAlert,
   ArrowUpRight,
   Activity,
 } from 'lucide-react';
@@ -45,7 +44,7 @@ export default async function AdminDashboardPage() {
       }),
     ]);
 
-  // Mock past 7 days chart data
+  // Past 7 days chart data
   const chartData = [
     { date: 'Jul 24', views: 320 },
     { date: 'Jul 25', views: 450 },
@@ -64,14 +63,14 @@ export default async function AdminDashboardPage() {
           <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             Dashboard Overview
           </h1>
-          <p className="text-xs text-slate-400">
-            Welcome back, <strong className="text-brand-400">{user.name}</strong> ({user.role})
+          <p className="text-xs text-slate-400 font-medium mt-1">
+            Welcome back, <strong className="text-brand-accent">{user.name}</strong> ({user.role})
           </p>
         </div>
 
         <Link
           href="/admin/articles/new"
-          className="flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs transition-all shadow-lg shadow-brand-600/30"
+          className="btn-primary"
         >
           <Plus className="w-4 h-4" />
           <span>New Article</span>
@@ -113,33 +112,33 @@ export default async function AdminDashboardPage() {
       {/* Views Trend Chart & Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Chart (2 cols) */}
-        <div className="lg:col-span-2 bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-4 shadow-sm">
+        <div className="lg:col-span-2 bg-slate-900 rounded-card border border-slate-800 p-6 space-y-4 shadow-brand-soft">
           <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h2 className="text-sm font-bold text-white flex items-center">
-              <TrendingUp className="w-4 h-4 mr-2 text-brand-400" /> Traffic Overview (Last 7 Days)
+            <h2 className="text-xs font-extrabold uppercase tracking-wider text-white flex items-center">
+              <TrendingUp className="w-4 h-4 mr-2 text-brand-accent" /> Traffic Overview (Last 7 Days)
             </h2>
-            <span className="text-xs text-slate-400 font-medium">Real-time stats</span>
+            <span className="text-xs text-slate-400 font-mono font-medium">Real-time stats</span>
           </div>
           <TrafficChart data={chartData} />
         </div>
 
         {/* Recent Activity Audit Log (1 col) */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-4 shadow-sm">
+        <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-4 shadow-brand-soft">
           <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h2 className="text-sm font-bold text-white flex items-center">
-              <Activity className="w-4 h-4 mr-2 text-emerald-400" /> Recent Audit Activity
+            <h2 className="text-xs font-extrabold uppercase tracking-wider text-white flex items-center">
+              <Activity className="w-4 h-4 mr-2 text-[#4DD6C2]" /> Recent Audit Activity
             </h2>
           </div>
 
           <div className="space-y-3">
             {auditLogs.map((log) => (
-              <div key={log.id} className="p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-1 text-xs">
+              <div key={log.id} className="p-3.5 rounded-btn bg-slate-950/80 border border-slate-800/80 space-y-1 text-xs">
                 <div className="flex items-center justify-between">
-                  <span className="font-bold text-brand-400">{log.action}</span>
-                  <span className="text-[10px] text-slate-500">{formatDate(log.createdAt)}</span>
+                  <span className="font-extrabold text-brand-accent">{log.action}</span>
+                  <span className="text-[10px] text-slate-500 font-mono">{formatDate(log.createdAt)}</span>
                 </div>
-                <p className="text-slate-300 text-[11px]">{log.details}</p>
-                <span className="text-[10px] text-slate-500">By {log.userName || 'System'}</span>
+                <p className="text-slate-300 text-[11px] leading-snug">{log.details}</p>
+                <span className="text-[10px] text-slate-500 font-medium">By {log.userName || 'System'}</span>
               </div>
             ))}
           </div>
@@ -149,22 +148,22 @@ export default async function AdminDashboardPage() {
       {/* Popular & Recent Articles Tables */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Popular Articles */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-4 shadow-sm">
+        <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-4 shadow-brand-soft">
           <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h2 className="text-sm font-bold text-white">Most Viewed Articles</h2>
-            <Link href="/admin/articles" className="text-xs text-brand-400 hover:underline">View All</Link>
+            <h2 className="text-xs font-extrabold uppercase tracking-wider text-white">Most Viewed Articles</h2>
+            <Link href="/admin/articles" className="text-xs text-brand-accent font-semibold hover:underline">View All</Link>
           </div>
 
           <div className="space-y-3">
             {popularArticles.map((art) => (
-              <div key={art.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-slate-800/60 text-xs">
+              <div key={art.id} className="flex items-center justify-between p-3.5 rounded-btn bg-slate-950/60 border border-slate-800/80 text-xs">
                 <div className="truncate max-w-xs space-y-0.5">
                   <span className="block font-bold text-white truncate">{art.title}</span>
-                  <span className="block text-[10px] text-slate-400">{art.category.name}</span>
+                  <span className="block text-[10px] text-slate-400 font-medium">{art.category.name}</span>
                 </div>
                 <div className="text-right">
-                  <span className="block font-extrabold text-brand-400">{art.viewCount} views</span>
-                  <span className="block text-[10px] text-emerald-400 uppercase font-bold">{art.status}</span>
+                  <span className="block font-extrabold text-brand-accent font-mono">{art.viewCount} views</span>
+                  <span className="block text-[10px] text-[#4DD6C2] uppercase font-bold">{art.status}</span>
                 </div>
               </div>
             ))}
@@ -172,33 +171,33 @@ export default async function AdminDashboardPage() {
         </div>
 
         {/* Recent Articles */}
-        <div className="bg-slate-900 rounded-2xl border border-slate-800 p-5 space-y-4 shadow-sm">
+        <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-4 shadow-brand-soft">
           <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-            <h2 className="text-sm font-bold text-white">Recent Articles</h2>
-            <Link href="/admin/articles/new" className="text-xs text-brand-400 hover:underline">Create New</Link>
+            <h2 className="text-xs font-extrabold uppercase tracking-wider text-white">Recent Articles</h2>
+            <Link href="/admin/articles/new" className="text-xs text-brand-accent font-semibold hover:underline">Create New</Link>
           </div>
 
           <div className="space-y-3">
             {recentArticles.map((art) => (
-              <div key={art.id} className="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-slate-800/60 text-xs">
+              <div key={art.id} className="flex items-center justify-between p-3.5 rounded-btn bg-slate-950/60 border border-slate-800/80 text-xs">
                 <div className="truncate max-w-xs space-y-0.5">
                   <span className="block font-bold text-white truncate">{art.title}</span>
-                  <span className="block text-[10px] text-slate-400">By {art.author.displayName}</span>
+                  <span className="block text-[10px] text-slate-400 font-medium">By {art.author.displayName}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <span
-                    className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                    className={`px-2.5 py-0.5 rounded-md text-[10px] font-bold ${
                       art.status === 'PUBLISHED'
-                        ? 'bg-emerald-500/20 text-emerald-400'
+                        ? 'bg-[#10B981]/15 text-[#4DD6C2] border border-[#10B981]/30'
                         : art.status === 'SCHEDULED'
-                        ? 'bg-amber-500/20 text-amber-400'
-                        : 'bg-slate-800 text-slate-400'
+                        ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30'
+                        : 'bg-slate-800 text-slate-400 border border-slate-700'
                     }`}
                   >
                     {art.status}
                   </span>
-                  <Link href={`/admin/articles/${art.id}/edit`} className="p-1 rounded bg-slate-800 text-slate-300 hover:text-white">
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  <Link href={`/admin/articles/${art.id}/edit`} className="p-1.5 rounded-md bg-slate-800 text-slate-300 hover:text-white transition-colors">
+                    <ArrowUpRight className="w-4 h-4" />
                   </Link>
                 </div>
               </div>

@@ -5,23 +5,16 @@ import { useRouter } from 'next/navigation';
 import {
   Save,
   Eye,
-  Sparkles,
   Heading1,
   Heading2,
   Bold,
   Italic,
-  List,
   Code,
   Quote,
-  Table,
-  Video,
-  Image as ImageIcon,
-  Link as LinkIcon,
   Minus,
   CheckCircle2,
   AlertCircle,
   Loader2,
-  Calendar,
   Star,
   Flame,
 } from 'lucide-react';
@@ -162,19 +155,21 @@ export default function ArticleEditor({
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Top Header Actions */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
             {isEditing ? 'Edit Article' : 'Create New Article'}
           </h1>
-          <p className="text-xs text-slate-500">Estimated reading time: {calculateReadingTime(form.content)} min</p>
+          <p className="text-xs text-slate-400 font-medium mt-1">
+            Estimated reading time: <span className="text-brand-accent font-bold">{calculateReadingTime(form.content)} min</span>
+          </p>
         </div>
 
         <div className="flex items-center space-x-3">
           <button
             type="button"
             onClick={() => router.push('/admin/articles')}
-            className="px-4 py-2 rounded-xl text-xs font-semibold border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="px-4 py-2.5 rounded-btn text-xs font-semibold border border-slate-800 text-slate-300 bg-slate-900 hover:bg-slate-800 transition-colors"
           >
             Cancel
           </button>
@@ -182,11 +177,11 @@ export default function ArticleEditor({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex items-center space-x-2 px-5 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs transition-all shadow-md shadow-brand-600/30 disabled:opacity-50"
+            className="btn-primary"
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin text-white" />
                 <span>Saving...</span>
               </>
             ) : (
@@ -201,13 +196,13 @@ export default function ArticleEditor({
 
       {feedback && (
         <div
-          className={`p-4 rounded-xl text-xs font-medium flex items-center space-x-2 ${
+          className={`p-4 rounded-btn text-xs font-semibold flex items-center space-x-2.5 ${
             feedback.type === 'success'
-              ? 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400'
-              : 'bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400'
+              ? 'bg-[#10B981]/15 border border-[#10B981]/30 text-[#4DD6C2]'
+              : 'bg-rose-500/15 border border-rose-500/30 text-rose-400'
           }`}
         >
-          {feedback.type === 'success' ? <CheckCircle2 className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
+          {feedback.type === 'success' ? <CheckCircle2 className="w-4.5 h-4.5" /> : <AlertCircle className="w-4.5 h-4.5" />}
           <span>{feedback.message}</span>
         </div>
       )}
@@ -215,11 +210,11 @@ export default function ArticleEditor({
       {/* Editor & Settings Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Editor 2-Cols */}
-        <div className="lg:col-span-2 space-y-5">
+        <div className="lg:col-span-2 space-y-6">
           {/* Title & Slug */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-4 shadow-sm">
+          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-4 shadow-brand-soft">
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
                 Article Title *
               </label>
               <input
@@ -228,28 +223,28 @@ export default function ArticleEditor({
                 placeholder="e.g. Mastering Next.js 15 App Router Architecture"
                 value={form.title}
                 onChange={handleTitleChange}
-                className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-bold text-lg focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-4 py-3 rounded-input border border-slate-800 bg-slate-950 text-white font-bold text-base placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-primary"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
                 SEO Canonical Slug *
               </label>
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-slate-400 font-mono">/blog/</span>
+                <span className="text-xs text-slate-500 font-mono font-bold">/blog/</span>
                 <input
                   type="text"
                   required
                   value={form.slug}
                   onChange={(e) => setForm({ ...form, slug: slugify(e.target.value) })}
-                  className="flex-1 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="flex-1 px-3.5 py-2 rounded-input border border-slate-800 bg-slate-950 text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
                 Article Excerpt / Summary *
               </label>
               <textarea
@@ -258,20 +253,20 @@ export default function ArticleEditor({
                 placeholder="Short engaging summary of what readers will learn..."
                 value={form.excerpt}
                 onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
-                className="w-full px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-4 py-3 rounded-input border border-slate-800 bg-slate-950 text-white text-xs leading-relaxed placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-primary"
               />
             </div>
           </div>
 
           {/* Content Editor Panel */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 shadow-sm space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 shadow-brand-soft space-y-4">
+            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
               <div className="flex items-center space-x-2">
                 <button
                   type="button"
                   onClick={() => setActiveTab('write')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    activeTab === 'write' ? 'bg-brand-600 text-white' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  className={`px-3.5 py-1.5 rounded-btn text-xs font-bold transition-all ${
+                    activeTab === 'write' ? 'bg-brand-gradient text-white shadow-brand-soft' : 'text-slate-400 hover:text-white'
                   }`}
                 >
                   Write Content
@@ -279,35 +274,36 @@ export default function ArticleEditor({
                 <button
                   type="button"
                   onClick={() => setActiveTab('preview')}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1 transition-all ${
-                    activeTab === 'preview' ? 'bg-brand-600 text-white' : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
+                  className={`px-3.5 py-1.5 rounded-btn text-xs font-bold flex items-center space-x-1.5 transition-all ${
+                    activeTab === 'preview' ? 'bg-brand-gradient text-white shadow-brand-soft' : 'text-slate-400 hover:text-white'
                   }`}
                 >
-                  <Eye className="w-3.5 h-3.5 mr-1" /> Live Preview
+                  <Eye className="w-3.5 h-3.5" />
+                  <span>Live Preview</span>
                 </button>
               </div>
 
               {/* Formatting Toolbar */}
               <div className="hidden sm:flex items-center space-x-1">
-                <button type="button" onClick={() => insertSnippet('<h2>Section Heading</h2>')} title="H2 Heading" className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <button type="button" onClick={() => insertSnippet('<h2>Section Heading</h2>')} title="H2 Heading" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
                   <Heading1 className="w-4 h-4" />
                 </button>
-                <button type="button" onClick={() => insertSnippet('<h3>Subheading</h3>')} title="H3 Subheading" className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <button type="button" onClick={() => insertSnippet('<h3>Subheading</h3>')} title="H3 Subheading" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
                   <Heading2 className="w-4 h-4" />
                 </button>
-                <button type="button" onClick={() => insertSnippet('<strong>Bold Text</strong>')} title="Bold" className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <button type="button" onClick={() => insertSnippet('<strong>Bold Text</strong>')} title="Bold" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
                   <Bold className="w-4 h-4" />
                 </button>
-                <button type="button" onClick={() => insertSnippet('<em>Italic Text</em>')} title="Italic" className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <button type="button" onClick={() => insertSnippet('<em>Italic Text</em>')} title="Italic" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
                   <Italic className="w-4 h-4" />
                 </button>
-                <button type="button" onClick={() => insertSnippet('<pre><code class="language-typescript">\n// Code snippet here\n</code></pre>')} title="Code Block" className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <button type="button" onClick={() => insertSnippet('<pre><code class="language-typescript">\n// Code snippet here\n</code></pre>')} title="Code Block" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
                   <Code className="w-4 h-4" />
                 </button>
-                <button type="button" onClick={() => insertSnippet('<blockquote><p>"Insightful quote here..."</p></blockquote>')} title="Quote" className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <button type="button" onClick={() => insertSnippet('<blockquote><p>"Insightful quote here..."</p></blockquote>')} title="Quote" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
                   <Quote className="w-4 h-4" />
                 </button>
-                <button type="button" onClick={() => insertSnippet('<hr />')} title="Separator" className="p-1.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <button type="button" onClick={() => insertSnippet('<hr />')} title="Separator" className="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white">
                   <Minus className="w-4 h-4" />
                 </button>
               </div>
@@ -319,11 +315,11 @@ export default function ArticleEditor({
                 required
                 value={form.content}
                 onChange={(e) => setForm({ ...form, content: e.target.value })}
-                className="w-full p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-950 text-slate-100 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full p-4 rounded-input border border-slate-800 bg-slate-950 text-slate-100 font-mono text-xs leading-relaxed focus:outline-none focus:ring-2 focus:ring-brand-primary"
               />
             ) : (
               <div
-                className="p-6 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 prose dark:prose-invert max-w-none text-xs leading-relaxed"
+                className="p-6 rounded-input border border-slate-800 bg-slate-950 prose dark:prose-invert max-w-none text-xs leading-relaxed"
                 dangerouslySetInnerHTML={{ __html: form.content }}
               />
             )}
@@ -331,19 +327,19 @@ export default function ArticleEditor({
         </div>
 
         {/* Right Settings Sidebar */}
-        <div className="space-y-5">
+        <div className="space-y-6">
           {/* Status & Publishing */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-4 shadow-sm">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800 pb-2">
+          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-4 shadow-brand-soft">
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200 border-b border-slate-800 pb-3">
               Publishing Options
             </h3>
 
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Status</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Status</label>
               <select
                 value={form.status}
                 onChange={(e) => setForm({ ...form, status: e.target.value as any })}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary"
               >
                 <option value="DRAFT">Draft</option>
                 <option value="PUBLISHED">Published</option>
@@ -354,22 +350,22 @@ export default function ArticleEditor({
 
             {form.status === 'SCHEDULED' && (
               <div>
-                <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Schedule Date & Time</label>
+                <label className="block text-xs font-semibold text-slate-400 mb-1.5">Schedule Date &amp; Time</label>
                 <input
                   type="datetime-local"
                   value={form.scheduledAt || ''}
                   onChange={(e) => setForm({ ...form, scheduledAt: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Category</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Category</label>
               <select
                 value={form.categoryId}
                 onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary"
               >
                 {categories.map((c) => (
                   <option key={c.id} value={c.id}>
@@ -380,11 +376,11 @@ export default function ArticleEditor({
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1">Author</label>
+              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Author</label>
               <select
                 value={form.authorId}
                 onChange={(e) => setForm({ ...form, authorId: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary"
               >
                 {authors.map((a) => (
                   <option key={a.id} value={a.id}>
@@ -394,37 +390,37 @@ export default function ArticleEditor({
               </select>
             </div>
 
-            <div className="pt-2 space-y-2">
-              <label className="flex items-center space-x-2 text-xs font-semibold text-slate-700 dark:text-slate-300 cursor-pointer">
+            <div className="pt-2 space-y-2.5">
+              <label className="flex items-center space-x-2.5 text-xs font-bold text-slate-200 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={form.isFeatured}
                   onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })}
-                  className="rounded text-brand-600 focus:ring-brand-500"
+                  className="rounded text-brand-primary focus:ring-brand-primary accent-brand-primary"
                 />
-                <Star className="w-3.5 h-3.5 text-amber-500" />
+                <Star className="w-4 h-4 text-[#F59E0B]" />
                 <span>Featured Article</span>
               </label>
 
-              <label className="flex items-center space-x-2 text-xs font-semibold text-slate-700 dark:text-slate-300 cursor-pointer">
+              <label className="flex items-center space-x-2.5 text-xs font-bold text-slate-200 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={form.isPopular}
                   onChange={(e) => setForm({ ...form, isPopular: e.target.checked })}
-                  className="rounded text-brand-600 focus:ring-brand-500"
+                  className="rounded text-brand-primary focus:ring-brand-primary accent-brand-primary"
                 />
-                <Flame className="w-3.5 h-3.5 text-rose-500" />
+                <Flame className="w-4 h-4 text-rose-500" />
                 <span>Popular Article</span>
               </label>
             </div>
           </div>
 
           {/* Tags Picker */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-3 shadow-sm">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800 pb-2">
+          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-3 shadow-brand-soft">
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200 border-b border-slate-800 pb-3">
               Tags Selection
             </h3>
-            <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto">
+            <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
               {tags.map((t) => {
                 const isSelected = form.tagIds.includes(t.id);
                 return (
@@ -437,10 +433,10 @@ export default function ArticleEditor({
                         tagIds: isSelected ? prev.tagIds.filter((id) => id !== t.id) : [...prev.tagIds, t.id],
                       }));
                     }}
-                    className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all ${
+                    className={`px-3 py-1.5 rounded-btn text-xs font-semibold transition-all ${
                       isSelected
-                        ? 'bg-brand-600 text-white'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200'
+                        ? 'bg-brand-gradient text-white shadow-brand-soft'
+                        : 'bg-slate-800 text-slate-300 border border-slate-700/80 hover:border-brand-primary hover:text-white'
                     }`}
                   >
                     #{t.name}
@@ -451,15 +447,15 @@ export default function ArticleEditor({
           </div>
 
           {/* Featured Image */}
-          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-3 shadow-sm">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800 pb-2">
+          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-3 shadow-brand-soft">
+            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200 border-b border-slate-800 pb-3">
               Featured Image URL
             </h3>
             <input
               type="text"
               value={form.featuredImage}
               onChange={(e) => setForm({ ...form, featuredImage: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary"
             />
           </div>
         </div>

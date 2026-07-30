@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { Plus, Edit, Eye, Search, Filter, Trash2 } from 'lucide-react';
+import { Plus, Edit, Eye, Search } from 'lucide-react';
 import { formatDate } from '@/lib/utils';
 
 interface ArticlesPageProps {
@@ -51,13 +51,13 @@ export default async function AdminArticlesPage({ searchParams }: ArticlesPagePr
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
         <div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">Article Management</h1>
-          <p className="text-xs text-slate-400">Total {articles.length} articles found</p>
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">Article Management</h1>
+          <p className="text-xs text-slate-400 font-medium">Total {articles.length} articles found</p>
         </div>
 
         <Link
           href="/admin/articles/new"
-          className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-bold text-xs transition-all shadow-md shadow-brand-600/30"
+          className="btn-primary"
         >
           <Plus className="w-4 h-4" />
           <span>Create Article</span>
@@ -65,8 +65,8 @@ export default async function AdminArticlesPage({ searchParams }: ArticlesPagePr
       </div>
 
       {/* Filter Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900 p-4 rounded-2xl border border-slate-800">
-        <form action="/admin/articles" method="GET" className="flex items-center space-x-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800">
+      <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-900 p-4 rounded-card border border-slate-800 shadow-brand-soft">
+        <form action="/admin/articles" method="GET" className="flex items-center space-x-2 bg-slate-950 px-3.5 py-2 rounded-btn border border-slate-800">
           <Search className="w-4 h-4 text-slate-500" />
           <input
             type="text"
@@ -79,14 +79,14 @@ export default async function AdminArticlesPage({ searchParams }: ArticlesPagePr
 
         <div className="flex items-center space-x-2 text-xs">
           <span className="text-slate-400 font-semibold">Status:</span>
-          <div className="flex items-center space-x-1">
+          <div className="flex items-center space-x-1.5">
             {['ALL', 'PUBLISHED', 'DRAFT', 'SCHEDULED', 'ARCHIVED'].map((st) => (
               <Link
                 key={st}
                 href={`/admin/articles?status=${st}${category ? `&category=${category}` : ''}`}
-                className={`px-2.5 py-1 rounded-lg font-bold text-[11px] ${
+                className={`px-3 py-1.5 rounded-btn font-bold text-[11px] transition-all ${
                   (status === st || (!status && st === 'ALL'))
-                    ? 'bg-brand-600 text-white'
+                    ? 'bg-brand-gradient text-white shadow-brand-soft'
                     : 'bg-slate-800 text-slate-400 hover:text-white'
                 }`}
               >
@@ -98,7 +98,7 @@ export default async function AdminArticlesPage({ searchParams }: ArticlesPagePr
       </div>
 
       {/* Data Table */}
-      <div className="bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-sm">
+      <div className="bg-slate-900 rounded-card border border-slate-800 overflow-hidden shadow-brand-soft">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs text-slate-300">
             <thead className="bg-slate-950 text-slate-400 uppercase tracking-wider text-[10px] font-bold border-b border-slate-800">
@@ -123,7 +123,7 @@ export default async function AdminArticlesPage({ searchParams }: ArticlesPagePr
                 articles.map((art) => (
                   <tr key={art.id} className="hover:bg-slate-850 transition-colors">
                     <td className="p-4 max-w-sm">
-                      <Link href={`/admin/articles/${art.id}/edit`} className="font-bold text-white hover:text-brand-400 block truncate">
+                      <Link href={`/admin/articles/${art.id}/edit`} className="font-bold text-white hover:text-brand-accent block truncate">
                         {art.title}
                       </Link>
                       <span className="text-[11px] text-slate-400 line-clamp-1">{art.excerpt}</span>
@@ -134,25 +134,25 @@ export default async function AdminArticlesPage({ searchParams }: ArticlesPagePr
                       <span
                         className={`px-2.5 py-0.5 rounded-md text-[10px] font-bold ${
                           art.status === 'PUBLISHED'
-                            ? 'bg-emerald-500/20 text-emerald-400'
+                            ? 'bg-[#10B981]/15 text-[#4DD6C2] border border-[#10B981]/30'
                             : art.status === 'SCHEDULED'
-                            ? 'bg-amber-500/20 text-amber-400'
-                            : 'bg-slate-800 text-slate-400'
+                            ? 'bg-amber-500/15 text-amber-400 border border-amber-500/30'
+                            : 'bg-slate-800 text-slate-400 border border-slate-700'
                         }`}
                       >
                         {art.status}
                       </span>
                     </td>
-                    <td className="p-4 font-bold text-brand-400">{art.viewCount}</td>
-                    <td className="p-4 text-slate-400">{formatDate(art.createdAt)}</td>
+                    <td className="p-4 font-extrabold text-brand-accent font-mono">{art.viewCount}</td>
+                    <td className="p-4 text-slate-400 font-medium">{formatDate(art.createdAt)}</td>
                     <td className="p-4 text-right">
                       <div className="flex items-center justify-end space-x-2">
                         {art.status === 'PUBLISHED' && (
-                          <Link href={`/blog/${art.slug}`} target="_blank" className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300" title="View Public">
+                          <Link href={`/blog/${art.slug}`} target="_blank" className="p-1.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-300" title="View Public">
                             <Eye className="w-3.5 h-3.5" />
                           </Link>
                         )}
-                        <Link href={`/admin/articles/${art.id}/edit`} className="p-1.5 rounded-lg bg-brand-600 hover:bg-brand-500 text-white" title="Edit Article">
+                        <Link href={`/admin/articles/${art.id}/edit`} className="p-1.5 rounded-md bg-brand-gradient text-white shadow-brand-soft" title="Edit Article">
                           <Edit className="w-3.5 h-3.5" />
                         </Link>
                       </div>

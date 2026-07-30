@@ -40,26 +40,26 @@ export default function NewsletterBox() {
   };
 
   return (
-    <div className="w-full my-8 bg-gradient-to-br from-brand-50/90 via-white to-sky-50/80 rounded-3xl p-6 sm:p-10 text-slate-900 shadow-sm relative overflow-hidden border border-brand-200/90 dark:from-slate-900 dark:via-brand-950 dark:to-slate-900 dark:text-white dark:border-brand-900/40">
-      <div className="absolute top-0 right-0 -mt-12 -mr-12 w-56 h-56 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="relative z-10 max-w-2xl mx-auto text-center space-y-4">
-        <div className="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-brand-900/50 border border-brand-200 dark:border-brand-700/50 flex items-center justify-center mx-auto text-brand-600 dark:text-brand-400 shadow-xs">
-          <Mail className="w-6 h-6" />
+    <div className="w-full my-10 bg-brand-gradient rounded-dialog p-8 sm:p-12 text-white shadow-brand-glow relative overflow-hidden">
+      <div className="absolute top-0 right-0 -mt-16 -mr-16 w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="relative z-10 max-w-2xl mx-auto text-center space-y-5">
+        <div className="w-14 h-14 rounded-card bg-white/15 backdrop-blur-md border border-white/20 flex items-center justify-center mx-auto text-white shadow-brand-soft">
+          <Mail className="w-7 h-7" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+        <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-white">
           Join 10,000+ Software Engineers
         </h2>
-        <p className="text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed">
+        <p className="text-sm sm:text-base text-white/90 max-w-lg mx-auto leading-relaxed font-normal">
           Get our top weekly technical deep-dives on Next.js, Cloud Architecture, DevOps, AI, and Security directly in your inbox.
         </p>
 
         {status === 'success' ? (
-          <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 flex items-center justify-center space-x-2 text-sm font-semibold animate-in fade-in">
-            <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-emerald-600 dark:text-emerald-400" />
+          <div className="p-4 rounded-btn bg-white/20 backdrop-blur-md border border-white/30 text-white flex items-center justify-center space-x-2 text-sm font-semibold animate-in fade-in">
+            <CheckCircle2 className="w-5 h-5 flex-shrink-0 text-brand-success" />
             <span>{message}</span>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-3">
             <input
               type="email"
               required
@@ -69,16 +69,16 @@ export default function NewsletterBox() {
                 setEmail(e.target.value);
                 if (status === 'error') setStatus('idle');
               }}
-              className="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 text-sm font-medium transition-all shadow-xs"
+              className="flex-1 px-4 py-3 rounded-btn bg-white/95 text-brand-text placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-white text-sm font-medium transition-all shadow-brand-soft"
             />
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 font-bold text-sm text-white transition-all shadow-md shadow-brand-600/25 disabled:opacity-50 flex items-center justify-center space-x-2"
+              className="px-6 py-3 rounded-btn bg-white text-brand-primary font-bold text-sm hover:bg-slate-50 transition-all shadow-brand-soft disabled:opacity-50 flex items-center justify-center space-x-2 hover:scale-[1.02] active:scale-100"
             >
               {status === 'loading' ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin text-brand-primary" />
                   <span>Subscribing...</span>
                 </>
               ) : (
@@ -89,7 +89,7 @@ export default function NewsletterBox() {
         )}
 
         {status === 'error' && (
-          <div className="flex items-center justify-center space-x-1.5 text-xs text-rose-600 dark:text-rose-400 font-semibold pt-1">
+          <div className="flex items-center justify-center space-x-1.5 text-xs text-rose-200 font-semibold pt-1">
             <AlertCircle className="w-4 h-4" />
             <span>{message}</span>
           </div>
