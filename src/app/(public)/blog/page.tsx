@@ -5,6 +5,8 @@ import ArticleCard from '@/components/public/ArticleCard';
 import { constructMetadata } from '@/lib/seo';
 import { Filter, Search, BookOpen } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = constructMetadata({
   title: 'Blog & Software Engineering Articles',
   description: 'Explore our complete library of technology guides, Next.js tutorials, Cloud DevOps, AI, and backend software architecture.',

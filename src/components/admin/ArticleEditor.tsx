@@ -35,6 +35,8 @@ import {
 } from 'lucide-react';
 import { calculateReadingTime, slugify } from '@/lib/utils';
 
+import ArticleSidebar from './editor/ArticleSidebar';
+
 export interface CategoryOption {
   id: string;
   name: string;
@@ -48,6 +50,7 @@ export interface TagOption {
 export interface AuthorOption {
   id: string;
   displayName: string;
+  avatar?: string | null;
 }
 
 export interface ArticleFormValues {
@@ -318,140 +321,25 @@ export default function ArticleEditor({
 
         </div>
 
-        {/* Right Settings Sidebar */}
-        <div className="space-y-6">
-          {/* Status & Publishing */}
-          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-4 shadow-brand-soft">
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200 border-b border-slate-800 pb-3">
-              Publishing Options
-            </h3>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Status</label>
-              <select
-                value={form.status}
-                onChange={(e) => setForm({ ...form, status: e.target.value as any })}
-                className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                <option value="DRAFT">Draft</option>
-                <option value="PUBLISHED">Published</option>
-                <option value="SCHEDULED">Scheduled</option>
-                <option value="ARCHIVED">Archived</option>
-              </select>
-            </div>
-
-            {form.status === 'SCHEDULED' && (
-              <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1.5">Schedule Date &amp; Time</label>
-                <input
-                  type="datetime-local"
-                  value={form.scheduledAt || ''}
-                  onChange={(e) => setForm({ ...form, scheduledAt: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary"
-                />
-              </div>
-            )}
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Category</label>
-              <select
-                value={form.categoryId}
-                onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Author</label>
-              <select
-                value={form.authorId}
-                onChange={(e) => setForm({ ...form, authorId: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-brand-primary"
-              >
-                {authors.map((a) => (
-                  <option key={a.id} value={a.id}>
-                    {a.displayName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="pt-2 space-y-2.5">
-              <label className="flex items-center space-x-2.5 text-xs font-bold text-slate-200 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form.isFeatured}
-                  onChange={(e) => setForm({ ...form, isFeatured: e.target.checked })}
-                  className="rounded text-brand-primary focus:ring-brand-primary accent-brand-primary"
-                />
-                <Star className="w-4 h-4 text-[#F59E0B]" />
-                <span>Featured Article</span>
-              </label>
-
-              <label className="flex items-center space-x-2.5 text-xs font-bold text-slate-200 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={form.isPopular}
-                  onChange={(e) => setForm({ ...form, isPopular: e.target.checked })}
-                  className="rounded text-brand-primary focus:ring-brand-primary accent-brand-primary"
-                />
-                <Flame className="w-4 h-4 text-rose-500" />
-                <span>Popular Article</span>
-              </label>
-            </div>
-          </div>
-
-          {/* Tags Picker */}
-          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-3 shadow-brand-soft">
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200 border-b border-slate-800 pb-3">
-              Tags Selection
-            </h3>
-            <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto">
-              {tags.map((t) => {
-                const isSelected = form.tagIds.includes(t.id);
-                return (
-                  <button
-                    type="button"
-                    key={t.id}
-                    onClick={() => {
-                      setForm((prev) => ({
-                        ...prev,
-                        tagIds: isSelected ? prev.tagIds.filter((id) => id !== t.id) : [...prev.tagIds, t.id],
-                      }));
-                    }}
-                    className={`px-3 py-1.5 rounded-btn text-xs font-semibold transition-all ${
-                      isSelected
-                        ? 'bg-brand-gradient text-white shadow-brand-soft'
-                        : 'bg-slate-800 text-slate-300 border border-slate-700/80 hover:border-brand-primary hover:text-white'
-                    }`}
-                  >
-                    #{t.name}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Featured Image */}
-          <div className="bg-slate-900 rounded-card border border-slate-800 p-6 space-y-3 shadow-brand-soft">
-            <h3 className="text-xs font-extrabold uppercase tracking-wider text-slate-200 border-b border-slate-800 pb-3">
-              Featured Image URL
-            </h3>
-            <input
-              type="text"
-              value={form.featuredImage}
-              onChange={(e) => setForm({ ...form, featuredImage: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-input border border-slate-800 bg-slate-950 text-white font-mono text-xs focus:outline-none focus:ring-2 focus:ring-brand-primary"
-            />
-          </div>
-        </div>
+        {/* Modern CMS Right Sidebar */}
+        <ArticleSidebar
+          form={form}
+          setForm={setForm}
+          categories={categories}
+          tags={tags}
+          authors={authors}
+          isSubmitting={isSubmitting}
+          onPublish={(e) => handleSubmit(e)}
+          onSaveDraft={() => {
+            setForm((prev) => ({ ...prev, status: 'DRAFT' }));
+            const dummyEvent = { preventDefault: () => {} } as React.FormEvent;
+            handleSubmit(dummyEvent);
+          }}
+          onPreview={() => setActiveTab('preview')}
+          isEditing={isEditing}
+        />
       </div>
     </form>
   );
 }
+

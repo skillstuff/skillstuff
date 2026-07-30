@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma';
 import { constructMetadata } from '@/lib/seo';
 import { FolderTree, ArrowRight } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata = constructMetadata({
   title: 'Engineering Categories & Tech Stacks',
   description: 'Browse articles by core technology category: Web Development, DevOps & Cloud, AI & Machine Learning, Software Architecture, and Security.',

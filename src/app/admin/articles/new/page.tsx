@@ -11,7 +11,7 @@ export default async function NewArticlePage() {
   const [categories, tags, authors] = await Promise.all([
     prisma.category.findMany({ select: { id: true, name: true }, orderBy: { name: 'asc' } }),
     prisma.tag.findMany({ select: { id: true, name: true }, orderBy: { name: 'asc' } }),
-    prisma.author.findMany({ select: { id: true, displayName: true }, orderBy: { displayName: 'asc' } }),
+    prisma.author.findMany({ select: { id: true, displayName: true, avatar: true }, orderBy: { displayName: 'asc' } }),
   ]);
 
   return (
