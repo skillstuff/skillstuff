@@ -33,6 +33,10 @@ const config: Config = {
         sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
       },
+      boxShadow: {
+        '2xs': '0 1px 2px 0 rgba(15, 23, 42, 0.03)',
+        'xs': '0 1px 3px 0 rgba(15, 23, 42, 0.05)',
+      },
     },
   },
   plugins: [],

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,6 +14,8 @@
   body {
     font-family: var(--font-sans);
     @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-indigo-600 selection:text-white;
+    background-image: radial-gradient(rgba(226, 232, 240, 0.6) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -22,11 +24,25 @@
   }
 }
 
-/* Custom Typography & Prose Styling for Technical Articles */
+/* Custom Technical Engineering Publication Utilities */
+.tech-grid-pattern {
+  background-image: radial-gradient(rgba(99, 102, 241, 0.12) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.editorial-shadow {
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 6px 16px -4px rgba(15, 23, 42, 0.06);
+}
+
+.editorial-shadow-lg {
+  box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+}
+
+/* Custom Typography & Prose Styling for Engineering Articles */
 .prose {
   font-family: var(--font-sans);
   color: #334155;
-  line-height: 1.75;
+  line-height: 1.8;
 }
 
 .dark .prose {
@@ -35,11 +51,11 @@
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
   font-family: var(--font-heading);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .prose h2 {
-  @apply text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-10 mb-4 pb-2 border-b border-slate-200 dark:border-slate-800/80 scroll-mt-20;
+  @apply text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mt-10 mb-4 pb-2.5 border-b border-slate-200/90 dark:border-slate-800/80 scroll-mt-20;
 }
 
 .prose h3 {
@@ -60,17 +76,17 @@
 
 .prose blockquote {
   font-family: var(--font-heading);
-  @apply border-l-4 border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/30 p-4 sm:p-5 rounded-r-xl italic my-6 text-slate-800 dark:text-slate-200 text-base shadow-sm;
+  @apply border-l-4 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/40 p-4 sm:p-5 rounded-r-2xl italic my-6 text-slate-800 dark:text-slate-200 text-base shadow-xs border-y border-r border-indigo-100/60 dark:border-indigo-900/40;
 }
 
 .prose pre {
   font-family: var(--font-mono);
-  @apply bg-slate-900 text-slate-100 p-5 rounded-2xl overflow-x-auto my-6 text-xs sm:text-sm border border-slate-800 shadow-xl leading-relaxed;
+  @apply bg-slate-900 text-slate-100 p-5 rounded-2xl overflow-x-auto my-6 text-xs sm:text-sm border border-slate-800 shadow-lg leading-relaxed;
 }
 
 .prose code {
   font-family: var(--font-mono);
-  @apply bg-slate-100 dark:bg-slate-800/90 text-indigo-600 dark:text-indigo-400 px-1.5 py-0.5 rounded font-semibold text-xs border border-slate-200/60 dark:border-slate-700/60;
+  @apply bg-indigo-50/90 dark:bg-slate-800/90 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.5 rounded-md font-semibold text-xs border border-indigo-100 dark:border-slate-700/60;
 }
 
 .prose pre code {
@@ -78,7 +94,7 @@
 }
 
 .prose table {
-  @apply w-full border-collapse my-6 text-left text-xs sm:text-sm rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800;
+  @apply w-full border-collapse my-6 text-left text-xs sm:text-sm rounded-xl overflow-hidden shadow-xs border border-slate-200 dark:border-slate-800;
 }
 
 .prose th {

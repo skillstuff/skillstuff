@@ -51,15 +51,15 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Brand Logo */}
-            <Link href="/" className="flex items-center space-x-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-slate-900 dark:bg-brand-600 flex items-center justify-center text-white font-black shadow-sm group-hover:scale-105 transition-transform">
-                <Code2 className="w-5 h-5 text-brand-400 dark:text-white" />
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-blue-600 flex items-center justify-center text-white font-black shadow-md shadow-indigo-600/20 group-hover:scale-105 transition-transform">
+                <Code2 className="w-5 h-5 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-brand-600 transition-colors">
-                  SkillStuff<span className="text-brand-600 dark:text-brand-400">.com</span>
+                <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors">
+                  SkillStuff<span className="text-indigo-600 dark:text-indigo-400">.com</span>
                 </span>
-                <span className="text-[9px] uppercase font-bold tracking-widest text-slate-400 dark:text-slate-400 -mt-1">
+                <span className="text-[9px] uppercase font-bold tracking-widest text-indigo-600/80 dark:text-indigo-400/80 -mt-1">
                   Engineering &amp; Software Publication
                 </span>
               </div>

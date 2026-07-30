@@ -43,75 +43,75 @@ export default async function HomePage() {
   return (
     <div className="space-y-12 pb-16">
       {/* Editorial Hero Section */}
-      <section className="bg-slate-900 text-white pt-10 pb-14 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <section className="bg-gradient-to-br from-indigo-50/90 via-white to-blue-50/60 pt-10 pb-14 border-b border-slate-200/90 text-slate-900 relative overflow-hidden dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-white dark:border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 relative z-10">
           {/* Header Tagline */}
           <div className="max-w-3xl space-y-3">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-brand-500/10 border border-brand-500/20 text-brand-400 text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Production Software Engineering</span>
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-indigo-100/90 border border-indigo-200/80 text-indigo-700 dark:bg-indigo-950/60 dark:border-indigo-800 dark:text-indigo-300 text-xs font-bold font-mono tracking-tight shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
+              <span>Production Software Engineering &amp; Architecture</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight text-white">
-              Practical guides on Next.js, Cloud Infrastructure &amp; AI.
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight text-slate-900 dark:text-white">
+              Practical deep-dives on Next.js, Cloud Infrastructure &amp; AI.
             </h1>
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-              Curated software architecture deep-dives and tutorials written by experienced lead engineers and architects.
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+              Curated software architecture guides, security patterns, and engineering tutorials written by lead architects.
             </p>
           </div>
 
           {/* Main Hero Article */}
           {mainHero && (
-            <div className="group rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 shadow-xl transition-all hover:border-slate-700">
+            <div className="group rounded-3xl overflow-hidden border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-indigo-500/5 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-300 dark:hover:border-indigo-500/50">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
-                <div className="lg:col-span-7 relative min-h-[280px] lg:min-h-[380px] bg-slate-900">
+                <div className="lg:col-span-7 relative min-h-[280px] lg:min-h-[380px] bg-slate-100 dark:bg-slate-950">
                   <Image
                     src={mainHero.featuredImage || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80'}
                     alt={mainHero.title}
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-cover group-hover:scale-[1.01] transition-transform duration-500"
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider bg-brand-600 text-white rounded-md shadow-md">
+                    <span className="px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider bg-indigo-600 text-white rounded-lg shadow-md">
                       Featured Masterclass
                     </span>
                   </div>
                 </div>
 
-                <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-slate-950">
+                <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between space-y-6 bg-white dark:bg-slate-900">
                   <div className="space-y-4">
-                    <div className="flex items-center space-x-2 text-xs text-slate-400">
-                      <span className="font-bold text-brand-400 uppercase tracking-wider">{mainHero.category.name}</span>
+                    <div className="flex items-center space-x-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                      <span className="font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">{mainHero.category.name}</span>
                       <span>&bull;</span>
                       <span>{formatDate(mainHero.publishedAt)}</span>
                       <span>&bull;</span>
                       <span>{mainHero.readingTime} min read</span>
                     </div>
 
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white group-hover:text-brand-400 transition-colors leading-snug">
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug tracking-tight">
                       <Link href={`/blog/${mainHero.slug}`}>{mainHero.title}</Link>
                     </h2>
 
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3">
                       {mainHero.excerpt}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between pt-4 border-t border-slate-800/80">
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
                     <div className="flex items-center space-x-2.5">
-                      <div className="w-8 h-8 rounded-full bg-slate-800 text-brand-400 font-bold flex items-center justify-center text-xs">
+                      <div className="w-8 h-8 rounded-full bg-indigo-50 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-bold flex items-center justify-center text-xs border border-indigo-100 dark:border-slate-700">
                         {mainHero.author.displayName.charAt(0)}
                       </div>
                       <div>
-                        <span className="block text-xs font-bold text-white">{mainHero.author.displayName}</span>
-                        <span className="block text-[10px] text-slate-400">Author</span>
+                        <span className="block text-xs font-bold text-slate-900 dark:text-white">{mainHero.author.displayName}</span>
+                        <span className="block text-[10px] text-slate-500 dark:text-slate-400">Author</span>
                       </div>
                     </div>
 
                     <Link
                       href={`/blog/${mainHero.slug}`}
-                      className="flex items-center space-x-1.5 text-xs font-bold text-brand-400 hover:text-white transition-colors"
+                      className="flex items-center space-x-1.5 text-xs font-extrabold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition-colors group-hover:translate-x-0.5 transform duration-200"
                     >
                       <span>Read Guide</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -126,11 +126,11 @@ export default async function HomePage() {
 
       {/* Category Pills Navigation */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center">
-            <Compass className="w-4 h-4 mr-1.5 text-brand-600" /> Explore Topics
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xs font-extrabold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center">
+            <Compass className="w-4 h-4 mr-1.5 text-indigo-600" /> Explore Topics
           </h2>
-          <Link href="/category" className="text-xs font-bold text-brand-600 hover:underline">
+          <Link href="/category" className="text-xs font-bold text-indigo-600 hover:underline">
             View All Categories &rarr;
           </Link>
         </div>
@@ -140,10 +140,10 @@ export default async function HomePage() {
             <Link
               key={cat.id}
               href={`/category/${cat.slug}`}
-              className="flex-shrink-0 px-3.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:border-brand-500 hover:text-brand-600 transition-all flex items-center space-x-2"
+              className="flex-shrink-0 px-3.5 py-1.5 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 text-xs font-semibold hover:border-indigo-400 hover:bg-indigo-50/50 hover:text-indigo-700 transition-all flex items-center space-x-2 shadow-2xs"
             >
               <span>{cat.name}</span>
-              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500">
+              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 font-mono font-bold">
                 {cat._count.articles}
               </span>
             </Link>
@@ -156,11 +156,11 @@ export default async function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Latest Articles */}
           <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-              <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center">
-                <Code2 className="w-4.5 h-4.5 mr-2 text-brand-600" /> Latest Tutorials &amp; Articles
+            <div className="flex items-center justify-between border-b border-slate-200/90 dark:border-slate-800 pb-3">
+              <h2 className="text-lg font-extrabold text-slate-900 dark:text-white flex items-center tracking-tight">
+                <Code2 className="w-4.5 h-4.5 mr-2 text-indigo-600" /> Latest Engineering Articles
               </h2>
-              <Link href="/blog" className="text-xs font-bold text-brand-600 hover:underline">
+              <Link href="/blog" className="text-xs font-bold text-indigo-600 hover:underline">
                 View Archive &rarr;
               </Link>
             </div>
@@ -175,24 +175,24 @@ export default async function HomePage() {
           {/* Sidebar */}
           <div className="space-y-8">
             {/* Trending Articles Widget */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-4 shadow-sm">
-              <div className="flex items-center space-x-2 text-sm font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-3">
-                <TrendingUp className="w-4 h-4 text-rose-500" />
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-5 space-y-4 shadow-xs">
+              <div className="flex items-center space-x-2 text-sm font-extrabold text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3">
+                <TrendingUp className="w-4 h-4 text-amber-500" />
                 <span>Most Popular Guides</span>
               </div>
 
               <div className="space-y-3.5">
                 {popularArticles.map((art, idx) => (
                   <div key={art.id} className="flex items-start space-x-3 group">
-                    <span className="font-black text-base text-slate-300 dark:text-slate-700 group-hover:text-brand-600 transition-colors w-5">
+                    <span className="font-mono font-black text-base text-slate-300 dark:text-slate-700 group-hover:text-indigo-600 transition-colors w-5">
                       0{idx + 1}
                     </span>
                     <div className="space-y-1">
-                      <span className="text-[10px] font-bold text-brand-600 uppercase tracking-wider">{art.category.name}</span>
-                      <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-brand-600 transition-colors line-clamp-2 leading-snug">
+                      <span className="text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">{art.category.name}</span>
+                      <h3 className="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 transition-colors line-clamp-2 leading-snug">
                         <Link href={`/blog/${art.slug}`}>{art.title}</Link>
                       </h3>
-                      <span className="text-[10px] text-slate-400 font-medium">{art.viewCount} views</span>
+                      <span className="text-[10px] text-slate-400 font-mono font-medium">{art.viewCount} views</span>
                     </div>
                   </div>
                 ))}
@@ -200,12 +200,12 @@ export default async function HomePage() {
             </div>
 
             {/* Authors Spotlight */}
-            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 p-5 space-y-4 shadow-sm">
-              <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
-                <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center">
-                  <Users className="w-4 h-4 mr-1.5 text-brand-600" /> Lead Contributors
+            <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-5 space-y-4 shadow-xs">
+              <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+                <span className="text-xs font-extrabold text-slate-900 dark:text-white flex items-center">
+                  <Users className="w-4 h-4 mr-1.5 text-indigo-600" /> Lead Contributors
                 </span>
-                <Link href="/authors" className="text-[11px] text-brand-600 font-semibold hover:underline">All Authors</Link>
+                <Link href="/authors" className="text-[11px] text-indigo-600 font-semibold hover:underline">All Authors</Link>
               </div>
 
               <div className="space-y-2.5">
@@ -215,7 +215,7 @@ export default async function HomePage() {
                     href={`/author/${auth.slug}`}
                     className="flex items-center space-x-3 p-2 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-colors"
                   >
-                    <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-bold flex items-center justify-center text-xs flex-shrink-0">
+                    <div className="w-8 h-8 rounded-full bg-indigo-50 dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 font-bold flex items-center justify-center text-xs flex-shrink-0 border border-indigo-100 dark:border-slate-700">
                       {auth.displayName.charAt(0)}
                     </div>
                     <div className="truncate">

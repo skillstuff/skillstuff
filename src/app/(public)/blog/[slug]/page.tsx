@@ -194,26 +194,26 @@ export default async function ArticleDetailPage({ params }: { params: Promise<{ 
           <SocialShare title={article.title} url={fullUrl} />
 
           {/* Author Box Footer */}
-          <div className="p-6 rounded-2xl bg-slate-900 text-white space-y-3 border border-slate-800">
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-indigo-50/90 via-white to-blue-50/60 text-slate-900 space-y-3 border border-indigo-200/90 shadow-xs dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 dark:text-white dark:border-indigo-900/40">
             <div className="flex items-center space-x-3.5">
-              <div className="w-12 h-12 rounded-full bg-slate-800 font-bold text-base flex items-center justify-center overflow-hidden flex-shrink-0">
+              <div className="w-12 h-12 rounded-full bg-indigo-100 dark:bg-slate-800 font-bold text-base flex items-center justify-center overflow-hidden flex-shrink-0 border border-indigo-200 dark:border-slate-700">
                 {article.author.avatar ? (
                   <Image src={article.author.avatar} alt={article.author.displayName} width={48} height={48} className="object-cover" />
                 ) : (
-                  <User className="w-5 h-5 text-slate-300" />
+                  <User className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
                 )}
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white">Written by {article.author.displayName}</h3>
-                <p className="text-xs text-brand-400 font-medium">{article.author.title || 'Contributor'}</p>
+                <h3 className="text-sm font-black text-slate-900 dark:text-white">Written by {article.author.displayName}</h3>
+                <p className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">{article.author.title || 'Contributor'}</p>
               </div>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               {article.author.bio || 'Technical writer and software engineer delivering deep tutorials.'}
             </p>
             <Link
               href={`/author/${article.author.slug}`}
-              className="inline-block text-xs font-bold text-brand-400 hover:text-white transition-colors"
+              className="inline-block text-xs font-bold text-indigo-600 dark:text-indigo-400 hover:underline transition-colors"
             >
               View all articles by {article.author.displayName} &rarr;
             </Link>
