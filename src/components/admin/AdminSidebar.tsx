@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -49,8 +50,14 @@ export default function AdminSidebar({ userRole, userName }: AdminSidebarProps) 
       {/* Brand Header */}
       <div className="p-5 border-b border-slate-800 flex items-center justify-between">
         <Link href="/admin" className="flex items-center space-x-2.5">
-          <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold shadow-md shadow-brand-500/20">
-            <Code2 className="w-5 h-5" />
+          <div className="w-9 h-9 rounded-xl overflow-hidden shadow-xs border border-slate-700 flex-shrink-0">
+            <Image
+              src="/logo.jpg"
+              alt="SkillStuff Logo"
+              width={36}
+              height={36}
+              className="w-full h-full object-cover"
+            />
           </div>
           <div>
             <span className="font-extrabold text-lg text-white tracking-tight">SkillStuff</span>

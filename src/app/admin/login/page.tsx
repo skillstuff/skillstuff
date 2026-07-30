@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { Code2, Lock, Mail, Loader2, ShieldCheck, AlertCircle } from 'lucide-react';
+import { Lock, Mail, Loader2, ShieldCheck, AlertCircle } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('admin@skillstuff.com');
-  const [password, setPassword] = useState('AdminPass123!');
+  const [password, setPassword] = useState('Admin@123456');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -41,8 +42,14 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-slate-900 rounded-3xl border border-slate-800 p-8 space-y-6 shadow-2xl">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-brand-600 flex items-center justify-center text-white mx-auto shadow-lg shadow-brand-500/30">
-            <Code2 className="w-6 h-6" />
+          <div className="w-12 h-12 rounded-2xl overflow-hidden border border-slate-700 mx-auto shadow-lg flex-shrink-0">
+            <Image
+              src="/logo.jpg"
+              alt="SkillStuff Logo"
+              width={48}
+              height={48}
+              className="w-full h-full object-cover"
+            />
           </div>
           <h1 className="text-2xl font-extrabold text-white tracking-tight">SkillStuff Admin Portal</h1>
           <p className="text-xs text-slate-400">Sign in to manage articles, media, users, and analytics</p>

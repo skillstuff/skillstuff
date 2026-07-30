@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { Search, Menu, X, Code2, UserCheck, ChevronRight } from 'lucide-react';
 
@@ -52,8 +53,14 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Brand Logo */}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-blue-600 flex items-center justify-center text-white font-black shadow-md shadow-indigo-600/20 group-hover:scale-105 transition-transform">
-                <Code2 className="w-5 h-5 text-white" />
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-xs border border-slate-200/80 group-hover:scale-105 transition-transform flex-shrink-0">
+                <Image
+                  src="/logo.jpg"
+                  alt="SkillStuff Logo"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors">

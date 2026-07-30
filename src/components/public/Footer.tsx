@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Code2, ShieldCheck, Rss, ArrowUpRight } from 'lucide-react';
 
 export default function Footer() {
@@ -10,8 +10,14 @@ export default function Footer() {
           {/* Brand Col */}
           <div className="md:col-span-1 space-y-4">
             <Link href="/" className="flex items-center space-x-2.5">
-              <div className="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold shadow-md shadow-brand-500/20">
-                <Code2 className="w-5 h-5" />
+              <div className="w-9 h-9 rounded-xl overflow-hidden shadow-xs border border-slate-700 flex-shrink-0">
+                <Image
+                  src="/logo.jpg"
+                  alt="SkillStuff Logo"
+                  width={36}
+                  height={36}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="font-extrabold text-xl tracking-tight text-white">
                 SkillStuff<span className="text-brand-400">.com</span>
