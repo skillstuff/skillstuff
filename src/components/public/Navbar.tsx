@@ -63,10 +63,10 @@ export default function Navbar() {
                 />
               </div>
               <div className="flex flex-col">
-                <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-indigo-600 transition-colors">
-                  SkillStuff<span className="text-indigo-600 dark:text-indigo-400">.com</span>
+                <span className="font-black text-lg tracking-tight text-slate-900 dark:text-white group-hover:text-brand-600 transition-colors">
+                  SkillStuff<span className="text-brand-600 dark:text-brand-400">.com</span>
                 </span>
-                <span className="text-[9px] uppercase font-bold tracking-widest text-indigo-600/80 dark:text-indigo-400/80 -mt-1">
+                <span className="text-[9px] uppercase font-bold tracking-widest text-brand-600 dark:text-brand-400 -mt-1">
                   Engineering &amp; Software Publication
                 </span>
               </div>

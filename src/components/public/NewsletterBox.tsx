@@ -40,10 +40,10 @@ export default function NewsletterBox() {
   };
 
   return (
-    <div className="w-full my-8 bg-gradient-to-br from-indigo-50/90 via-white to-blue-50/80 rounded-3xl p-6 sm:p-10 text-slate-900 shadow-sm relative overflow-hidden border border-indigo-200/90 dark:from-slate-900 dark:via-indigo-950 dark:to-slate-900 dark:text-white dark:border-indigo-900/40">
-      <div className="absolute top-0 right-0 -mt-12 -mr-12 w-56 h-56 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="w-full my-8 bg-gradient-to-br from-brand-50/90 via-white to-sky-50/80 rounded-3xl p-6 sm:p-10 text-slate-900 shadow-sm relative overflow-hidden border border-brand-200/90 dark:from-slate-900 dark:via-brand-950 dark:to-slate-900 dark:text-white dark:border-brand-900/40">
+      <div className="absolute top-0 right-0 -mt-12 -mr-12 w-56 h-56 bg-brand-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="relative z-10 max-w-2xl mx-auto text-center space-y-4">
-        <div className="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-indigo-900/50 border border-indigo-200 dark:border-indigo-700/50 flex items-center justify-center mx-auto text-indigo-600 dark:text-indigo-400 shadow-xs">
+        <div className="w-12 h-12 rounded-2xl bg-brand-100 dark:bg-brand-900/50 border border-brand-200 dark:border-brand-700/50 flex items-center justify-center mx-auto text-brand-600 dark:text-brand-400 shadow-xs">
           <Mail className="w-6 h-6" />
         </div>
         <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
@@ -69,12 +69,12 @@ export default function NewsletterBox() {
                 setEmail(e.target.value);
                 if (status === 'error') setStatus('idle');
               }}
-              className="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 text-sm font-medium transition-all shadow-xs"
+              className="flex-1 px-4 py-3 rounded-xl bg-white dark:bg-slate-800/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-600/20 focus:border-brand-600 text-sm font-medium transition-all shadow-xs"
             />
             <button
               type="submit"
               disabled={status === 'loading'}
-              className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 font-bold text-sm text-white transition-all shadow-md shadow-indigo-600/25 disabled:opacity-50 flex items-center justify-center space-x-2"
+              className="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 font-bold text-sm text-white transition-all shadow-md shadow-brand-600/25 disabled:opacity-50 flex items-center justify-center space-x-2"
             >
               {status === 'loading' ? (
                 <>

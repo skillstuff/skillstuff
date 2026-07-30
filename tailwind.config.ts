@@ -11,17 +11,17 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          50: "#eef2ff",
-          100: "#e0e7ff",
-          200: "#c7d2fe",
-          300: "#a5b4fc",
-          400: "#818cf8",
-          500: "#6366f1",
-          600: "#4f46e5",
-          700: "#4338ca",
-          800: "#3730a3",
-          900: "#312e81",
-          950: "#1e1b4b",
+          50: "#f0f9ff",
+          100: "#e0f2fe",
+          200: "#bae6fd",
+          300: "#7dd3fc",
+          400: "#38bdf8",
+          500: "#0ea5e9", // Logo Vibrant Sky Blue
+          600: "#0284c7", // Logo Primary Ocean Blue
+          700: "#0369a1", // Logo Deep Blue
+          800: "#075985",
+          900: "#0c4a6e",
+          950: "#082f49",
         },
         slate: {
           850: "#111827",

@@ -34,9 +34,9 @@ export default async function CategoryDetailPage({ params }: { params: Promise<{
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-      <div className="bg-gradient-to-br from-indigo-50/90 via-white to-blue-50/60 rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-3 relative overflow-hidden dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 dark:border-slate-800">
-        <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold uppercase tracking-wider text-indigo-700 dark:text-indigo-400 bg-indigo-100/80 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-200/80 dark:border-indigo-800">
-          <FolderTree className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+      <div className="bg-gradient-to-br from-brand-50/90 via-white to-sky-50/60 rounded-3xl p-8 sm:p-10 border border-slate-200/90 shadow-sm space-y-3 relative overflow-hidden dark:from-slate-900 dark:via-slate-900 dark:to-slate-950 dark:border-slate-800">
+        <div className="inline-flex items-center space-x-2 text-xs font-mono font-bold uppercase tracking-wider text-brand-700 dark:text-brand-400 bg-brand-100/80 dark:bg-brand-950/60 px-3 py-1 rounded-full border border-brand-200/80 dark:border-brand-800">
+          <FolderTree className="w-4 h-4 text-brand-600 dark:text-brand-400" />
           <span>Engineering Category</span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">{category.name}</h1>

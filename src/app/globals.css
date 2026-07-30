@@ -13,7 +13,7 @@
 
   body {
     font-family: var(--font-sans);
-    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-indigo-600 selection:text-white;
+    @apply bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased selection:bg-brand-600 selection:text-white;
     background-image: radial-gradient(rgba(226, 232, 240, 0.6) 1px, transparent 1px);
     background-size: 24px 24px;
   }
@@ -26,7 +26,7 @@
 
 /* Custom Technical Engineering Publication Utilities */
 .tech-grid-pattern {
-  background-image: radial-gradient(rgba(99, 102, 241, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(14, 165, 233, 0.15) 1px, transparent 1px);
   background-size: 20px 20px;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .editorial-shadow-lg {
-  box-shadow: 0 10px 30px -5px rgba(79, 70, 229, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 10px 30px -5px rgba(14, 165, 233, 0.15), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
 }
 
 /* Custom Typography & Prose Styling for Engineering Articles */
@@ -76,7 +76,7 @@
 
 .prose blockquote {
   font-family: var(--font-heading);
-  @apply border-l-4 border-indigo-600 bg-indigo-50/70 dark:bg-indigo-950/40 p-4 sm:p-5 rounded-r-2xl italic my-6 text-slate-800 dark:text-slate-200 text-base shadow-xs border-y border-r border-indigo-100/60 dark:border-indigo-900/40;
+  @apply border-l-4 border-brand-600 bg-brand-50/70 dark:bg-brand-950/40 p-4 sm:p-5 rounded-r-2xl italic my-6 text-slate-800 dark:text-slate-200 text-base shadow-xs border-y border-r border-brand-100/60 dark:border-brand-900/40;
 }
 
 .prose pre {
@@ -86,7 +86,7 @@
 
 .prose code {
   font-family: var(--font-mono);
-  @apply bg-indigo-50/90 dark:bg-slate-800/90 text-indigo-700 dark:text-indigo-300 px-1.5 py-0.5 rounded-md font-semibold text-xs border border-indigo-100 dark:border-slate-700/60;
+  @apply bg-brand-50/90 dark:bg-slate-800/90 text-brand-700 dark:text-brand-300 px-1.5 py-0.5 rounded-md font-semibold text-xs border border-brand-100 dark:border-slate-700/60;
 }
 
 .prose pre code {
