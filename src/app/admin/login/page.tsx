@@ -8,7 +8,7 @@ import { Lock, Mail, Loader2, ShieldCheck, AlertCircle, Eye, EyeOff } from 'luci
 export default function AdminLoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('admin@skillstuff.com');
-  const [password, setPassword] = useState('Admin@123456');
+  const [password, setPassword] = useState('AdminPass123!');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -126,7 +126,7 @@ export default function AdminLoginPage() {
         </form>
 
         <div className="pt-2 text-center text-[11px] text-slate-500 font-mono">
-          Demo Admin: admin@skillstuff.com / Admin@123456
+          Demo Admin: admin@skillstuff.com / AdminPass123!
         </div>
       </div>
     </div>
