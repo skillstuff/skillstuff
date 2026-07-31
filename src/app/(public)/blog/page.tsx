@@ -48,15 +48,26 @@ export default async function BlogArchivePage({ searchParams }: BlogPageProps) {
   if (sort === 'popular') orderBy = { viewCount: 'desc' };
   if (sort === 'readingTime') orderBy = { readingTime: 'desc' };
 
-  const [articles, categories, tags] = await Promise.all([
-    prisma.article.findMany({
-      where,
-      include: { category: true, author: true },
-      orderBy,
-    }),
-    prisma.category.findMany({ orderBy: { name: 'asc' } }),
-    prisma.tag.findMany({ orderBy: { name: 'asc' } }),
-  ]);
+  let articles: any[] = [];
+  let categories: any[] = [];
+  let tags: any[] = [];
+
+  try {
+    if (process.env.DATABASE_URL) {
+      [articles, categories, tags] = await Promise.all([
+        prisma.article.findMany({
+          where,
+          include: { category: true, author: true },
+          orderBy,
+        }),
+        prisma.category.findMany({ orderBy: { name: 'asc' } }),
+        prisma.tag.findMany({ orderBy: { name: 'asc' } }),
+      ]);
+    }
+  } catch (error) {
+    console.error('Blog archive DB fetch error:', error);
+  }
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">

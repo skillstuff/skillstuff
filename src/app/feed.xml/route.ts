@@ -3,12 +3,20 @@ import { getBaseUrl } from '@/lib/seo';
 
 export async function GET() {
   const baseUrl = getBaseUrl();
-  const articles = await prisma.article.findMany({
-    where: { status: 'PUBLISHED' },
-    include: { author: true, category: true },
-    orderBy: { publishedAt: 'desc' },
-    take: 20,
-  });
+  let articles: any[] = [];
+
+  try {
+    if (process.env.DATABASE_URL) {
+      articles = await prisma.article.findMany({
+        where: { status: 'PUBLISHED' },
+        include: { author: true, category: true },
+        orderBy: { publishedAt: 'desc' },
+        take: 20,
+      });
+    }
+  } catch (error) {
+    console.error('Feed RSS DB fetch error:', error);
+  }
 
   const rssItems = articles
     .map(
@@ -19,8 +27,8 @@ export async function GET() {
       <guid isPermaLink="true">${baseUrl}/blog/${art.slug}</guid>
       <pubDate>${art.publishedAt?.toUTCString() || art.createdAt.toUTCString()}</pubDate>
       <description><![CDATA[${art.excerpt}]]></description>
-      <author><![CDATA[${art.author.displayName}]]></author>
-      <category><![CDATA[${art.category.name}]]></category>
+      <author><![CDATA[${art.author?.displayName || 'SkillStuff Admin'}]]></author>
+      <category><![CDATA[${art.category?.name || 'General'}]]></category>
     </item>`
     )
     .join('');
@@ -45,3 +53,4 @@ export async function GET() {
     },
   });
 }
+

@@ -11,10 +11,18 @@ export const metadata = constructMetadata({
 });
 
 export default async function TagsIndexPage() {
-  const tags = await prisma.tag.findMany({
-    include: { _count: { select: { articles: true } } },
-    orderBy: { name: 'asc' },
-  });
+  let tags: any[] = [];
+  try {
+    if (process.env.DATABASE_URL) {
+      tags = await prisma.tag.findMany({
+        include: { _count: { select: { articles: true } } },
+        orderBy: { name: 'asc' },
+      });
+    }
+  } catch (error) {
+    console.error('Failed to load tags:', error);
+  }
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
