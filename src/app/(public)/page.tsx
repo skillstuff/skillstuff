@@ -10,33 +10,46 @@ import { formatDate } from '@/lib/utils';
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const [featuredArticles, latestArticles, popularArticles, categories, authors] = await Promise.all([
-    prisma.article.findMany({
-      where: { status: 'PUBLISHED', isFeatured: true },
-      include: { category: true, author: true },
-      orderBy: { publishedAt: 'desc' },
-      take: 3,
-    }),
-    prisma.article.findMany({
-      where: { status: 'PUBLISHED' },
-      include: { category: true, author: true },
-      orderBy: { publishedAt: 'desc' },
-      take: 6,
-    }),
-    prisma.article.findMany({
-      where: { status: 'PUBLISHED', isPopular: true },
-      include: { category: true, author: true },
-      orderBy: { viewCount: 'desc' },
-      take: 5,
-    }),
-    prisma.category.findMany({
-      include: { _count: { select: { articles: true } } },
-      orderBy: { name: 'asc' },
-    }),
-    prisma.author.findMany({
-      take: 3,
-    }),
-  ]);
+  let featuredArticles: any[] = [];
+  let latestArticles: any[] = [];
+  let popularArticles: any[] = [];
+  let categories: any[] = [];
+  let authors: any[] = [];
+
+  try {
+    if (process.env.DATABASE_URL) {
+      [featuredArticles, latestArticles, popularArticles, categories, authors] = await Promise.all([
+        prisma.article.findMany({
+          where: { status: 'PUBLISHED', isFeatured: true },
+          include: { category: true, author: true },
+          orderBy: { publishedAt: 'desc' },
+          take: 3,
+        }),
+        prisma.article.findMany({
+          where: { status: 'PUBLISHED' },
+          include: { category: true, author: true },
+          orderBy: { publishedAt: 'desc' },
+          take: 6,
+        }),
+        prisma.article.findMany({
+          where: { status: 'PUBLISHED', isPopular: true },
+          include: { category: true, author: true },
+          orderBy: { viewCount: 'desc' },
+          take: 5,
+        }),
+        prisma.category.findMany({
+          include: { _count: { select: { articles: true } } },
+          orderBy: { name: 'asc' },
+        }),
+        prisma.author.findMany({
+          take: 3,
+        }),
+      ]);
+    }
+  } catch (error) {
+    console.error('Homepage DB fetch error:', error);
+  }
+
 
   const mainHero = featuredArticles[0] || latestArticles[0];
 

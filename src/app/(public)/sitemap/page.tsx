@@ -11,16 +11,28 @@ export const metadata = constructMetadata({
 });
 
 export default async function HtmlSitemapPage() {
-  const [articles, categories, tags, authors] = await Promise.all([
-    prisma.article.findMany({
-      where: { status: 'PUBLISHED' },
-      select: { title: true, slug: true },
-      orderBy: { title: 'asc' },
-    }),
-    prisma.category.findMany({ select: { name: true, slug: true }, orderBy: { name: 'asc' } }),
-    prisma.tag.findMany({ select: { name: true, slug: true }, orderBy: { name: 'asc' } }),
-    prisma.author.findMany({ select: { displayName: true, slug: true }, orderBy: { displayName: 'asc' } }),
-  ]);
+  let articles: any[] = [];
+  let categories: any[] = [];
+  let tags: any[] = [];
+  let authors: any[] = [];
+
+  try {
+    if (process.env.DATABASE_URL) {
+      [articles, categories, tags, authors] = await Promise.all([
+        prisma.article.findMany({
+          where: { status: 'PUBLISHED' },
+          select: { title: true, slug: true },
+          orderBy: { title: 'asc' },
+        }),
+        prisma.category.findMany({ select: { name: true, slug: true }, orderBy: { name: 'asc' } }),
+        prisma.tag.findMany({ select: { name: true, slug: true }, orderBy: { name: 'asc' } }),
+        prisma.author.findMany({ select: { displayName: true, slug: true }, orderBy: { displayName: 'asc' } }),
+      ]);
+    }
+  } catch (error) {
+    console.error('HTML Sitemap DB fetch error:', error);
+  }
+
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
